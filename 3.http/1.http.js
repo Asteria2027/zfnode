@@ -9,10 +9,11 @@ function serve(requese,response){
     response.statusCode = 404;//设置状态码
     response.setHeader('Content-Type','text/html;charset=utf-8');//设置响应的类型，编码为utf-8
     response.setHeader('name','zzz');//设置响应头
-    fs.readFile()
-
-    response.write(new Date().toString());//写入响应体
-    response.end();
+    //读取文件的内容并且将读到的内容写入响应体
+    fs.readFile('index.html', function (err, data) {
+        response.write(data);//写入响应体
+        response.end();
+    });
 }
 //每当有请求来的时候调用serve函数对客户端进行响应
 var server =  http.createServer(serve);
