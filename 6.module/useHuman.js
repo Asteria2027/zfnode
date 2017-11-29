@@ -13,7 +13,9 @@ console.log(girl.getName(), girl.getAge());
 console.log(boy.getName(), boy.getAge());
 
 console.log(girl.home,boy.home);
-console.log(girl.hasOwnProperty('home'));
-girl.home = '深圳';
-console.log(girl.hasOwnProperty('home'));
+//console.log(girl.hasOwnProperty('home'));
+//girl.home = '深圳';
+Person.prototype.home = '上海';
+//console.log(girl.hasOwnProperty('home'));
 console.log(girl.home,boy.home);
+console.log(Person.staticName)

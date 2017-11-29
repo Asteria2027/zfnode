@@ -16,6 +16,7 @@ Person.prototype.setAge = function (age) {
 }
 
 Person.prototype.home = '北京';
+Person.staticName = '明';
 //exports.Person = Person;
 module.exports = Person;
 
