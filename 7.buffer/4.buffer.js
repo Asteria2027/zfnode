@@ -45,7 +45,7 @@ buf.write('中国',0,6);
 buf.write('工作',6,6);
 console.log(buf.toString());
 
-var buffer = new Buffer('珠峰学习');
+var buffer = new Buffer('订单学习');
 var buf1 = buffer.slice(0,7);
 var buf2 = buffer.slice(7);
 console.log(buf1.toString());
