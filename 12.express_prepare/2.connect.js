@@ -1,16 +1,57 @@
 var http = require('http');
+var url = require('url');
 var proto = {};
 
 function createServer(){
-    function app(req, res, next){
-
+    function app(req, res){
+        app.handle(req,res);//顺序执行app.stack里面的路由判断及对应的函数
     }
     //把proto中的属性拷贝到app对象里
     Object.assign(app,proto);
     app.stack = [];
+    return app;
 }
-proto.use = function (handle) {
-    this.stack.push(handle);
+proto.use = function (route,fn) {
+    var path = route;
+    var handle = fn;
+    if(typeof route != 'string'){
+        handle = route;
+        path = '/';
+    }
+    console.log('----',path);
+    this.stack.push({handle:handle,path:path});
+}
+
+proto.handle = function (req, res) {
+    var path = url.parse(req.url).pathname;
+    var stack = this.stack;
+    var index = 0;
+    function next(err){
+        var layer= stack[index++];
+        var route = layer.path;
+        var handle = layer.handle;
+
+        if(path.startsWith(route)){
+            if(err){
+                if(handle.length==4){
+                     handle(err,req,res,next);
+                }else {
+                    next(err);
+                }
+            }else {
+                console.log(path,route)
+                handle(req,res,next);
+            }
+        }else {
+            next();
+        }
+    }
+    next();
+}
+
+proto.listen = function (port) {
+    var server = http.createServer(this);
+    server.listen(port);
 }
 
 module.exports = createServer;
