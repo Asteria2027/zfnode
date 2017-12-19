@@ -33,17 +33,20 @@ app.listen(8080);
 
 var uuid = require('node-uuid');//npm i node-uuid
 
-function zfsession(){
+function zfsession(opt){
+    var options = opt || {};
     var data = {};
     return function (req, res, next) {
-        var id = req.cookies['connect.sid'] ? req.cookies['connect.sid'] : uuid.v4();
-        res.cookie('connect.sid',id,{
+        var sid = options.name?options.name:'connect.sid';
+        var id = req.cookies[sid] ? req.cookies['connect.sid'] : (options.genid?options.genid:uuid.v4());
+        res.cookie('connect.sid',id,options.cookie?options.cookie:{
             maxAge:60*1000
         });
         req.session = data[id]?data[id]:{};
         //当响应结束的时候要把在处理函数修改的session保存回data里
         res.on('finish', function () {
-            data[id] = req.session;
+            if(Object.keys(req.session).length>0||options.saveUninitialized)
+                data[id] = req.session;
         });
         next();
     }

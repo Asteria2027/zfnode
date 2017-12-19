@@ -8,9 +8,9 @@
 * */
 
 //function x(module, exports, require, __dirname, __filename){
-    var name = 'sss';
-    exports.name = name;
-    console.log(this.name);
+//    var name = 'sss';
+//    exports.name = name;
+//    console.log(this.name);
 
     //console.log(global);
 
@@ -32,26 +32,26 @@
 *   3.  全局对象
 *   4.  从外界传入的参数
 * */
-process.stdout.write('hello');
-console.log(process.pid);
+//process.stdout.write('hello');
+//console.log(process.pid);
 process.stdin.on('data', function (data) {
     console.log(data.toString())
 });
 
-process.argv.forEach(function (val, index, array) {
-    console.log(val, index, array);
-});
-
-process.on('exit', function () {
-    console.log('退出前执行')
-});
-
-try {
-    console.log(d)
-}catch (e){
-    console.log(e.message);
-}
-process.on('uncaughtException', function (e) {
-    console.log('uncaughtException',e.message);
-})
-console.log(b);
+//process.argv.forEach(function (val, index, array) {
+//    console.log(val, index, array);
+//});
+//
+//process.on('exit', function () {
+//    console.log('退出前执行')
+//});
+//
+//try {
+//    console.log(d)
+//}catch (e){
+//    console.log(e.message);
+//}
+//process.on('uncaughtException', function (e) {
+//    console.log('uncaughtException',e.message);
+//})
+//console.log(b);

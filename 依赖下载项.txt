@@ -1,0 +1,29 @@
+npm i express
+
+npm i ejs
+var express = require('express');
+var app = express();
+app.set('view engine', 'html');
+app.set('views', __dirname);
+app.engine('html', require('ejs').__express);
+
+npm i body-parser //��������ͷ
+var bodyParser = require('body-parser');
+var app = express();
+app.use(bodyParser.json());
+// querystring false
+app.use(bodyParser.urlencoded({extended:true}));//true ʹ��ԭ������ false ʹ��bodyParser��ķ����������ͽ��������
+res.send(req.body);
+
+npm i cookie-parser //����cookie
+app.use(cookieParser());
+req.cookies
+
+npm i express-session //����session
+req.session.sign
+
+npm i node-uuid //����
+uuid.v4()
+
+npm i mkdirp
+ mkdirp.sync(this._dir);
