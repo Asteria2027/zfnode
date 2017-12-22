@@ -5,19 +5,27 @@ function createApplication() {
     var app = function (req, res) {
         var index = 0;
 
-        function next() {
+        function next(err) {
             if (index == app.stack.length) {
                 return;
             }
             var layer = app.stack[index++];
             var route = layer.route;
             var fn = layer.fn;
-            console.log(layer)
-            console.log(fn)
-            if (req.url.startsWith(route)) {
-                fn(req, res, next);
-            } else {
-                next();
+            if(err){
+                if(fn.length == 4){
+                    fn(err, req, res, next);
+                }else {
+                    next(err);
+                }
+            }else {
+                console.log(layer)
+                console.log(fn)
+                if (req.url.startsWith(route)) {
+                    fn(req, res, next);
+                } else {
+                    next();
+                }
             }
         }
 

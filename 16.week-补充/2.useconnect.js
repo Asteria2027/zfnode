@@ -9,9 +9,9 @@ app.use(function (req, res, next) {
     }
     next();
 });
-//app.use(function (req, res, next) {
-//    res.send('hello');
-//})
+app.use(function (req, res, next) {
+    next('我出错了');
+})
 
 app.get('/hello',function (req, res) {
     res.send('get hello');
@@ -22,4 +22,9 @@ app.post('/hello',function (req, res) {
 app.all('/404',function (req, res) {
     res.send('404');
 });
+app.use(function (err, req, res, next) {
+    console.log(err);
+    res.send(err.message);
+})
+
 app.listen(8080);

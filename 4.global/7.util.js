@@ -47,14 +47,20 @@ p.toString();
 *   depth   对象的递归显示深度
 *   colors 是否显示颜色
 * */
-console.log(util.inspect(p,true,0,true));
+console.log(util.inspect(p,true,2,true));
 
 var arr1 = [1,2];
 var arr2 = [3,4];
-console.log(arr1.concat(arr2));
-console.log(Array.prototype.push.apply(arr1,arr2));//push返回值是长度
-console.log(arr1);
+console.log(arr1.concat(arr2));//[1,2,3,4]
+console.log(Array.prototype.push.apply(arr1,arr2));//push返回值是长度 4
+console.log(arr1);//[1,2,3,4]
 
-console.log(util.isArray([]));
-console.log(util.isDate([]));
-console.log(util.isRegExp([]));
+console.log(util.isArray([]));//true
+console.log(util.isDate([]));//false
+console.log(util.isRegExp([]));//false
+console.log(util.isError([]));//false
+
+var result = util.format('%s:%s', 'foo');
+console.log(result);
+var result2 = util.format('%s:%s', 'foo', 'bar', 'baz');
+console.log(result2);
