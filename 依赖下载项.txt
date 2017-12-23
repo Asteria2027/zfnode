@@ -27,3 +27,5 @@ uuid.v4()
 
 npm i mkdirp
  mkdirp.sync(this._dir);
+
+ npm i user-agent-parser
