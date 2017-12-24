@@ -29,3 +29,7 @@ npm i mkdirp
  mkdirp.sync(this._dir);
 
  npm i user-agent-parser
+userAgentParser(req.headers['user-agent'])
+
+ npm i http-proxy
+ var proxy = require('http-proxy').createProxyServer();
