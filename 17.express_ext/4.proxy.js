@@ -4,15 +4,36 @@
 
 var express = require('express');
 
-var proxy = require('http-proxy').createProxyServer();//npm i http-proxy
+// var proxy = require('http-proxy').createProxyServer();//npm i http-proxy
+
+var request = require('request');//npm i request
+
+// request('http://www.baidu.com', function (error, response, body) {
+//     if (!error && response.statusCode == 200) {
+//         console.log(body) // Show the HTML for the baidu homepage.
+//     }
+// })
 
 var app = express();
+
+function proxy(req, res, target) {
+    request(target,function (error, response, body) {
+        if(!error && response.statusCode == 200){
+            console.log(response)
+            res.end(body);
+        }
+    });
+}
+
 function proxyPass(config) {
     return function (req, res, next) {
         var target = config[req.hostname];
-        proxy.web(req, res,{
-            target:target
-        })
+        console.log('target',target)
+        // proxy.web(req, res,{
+        //     target:target
+        // })
+        console.log(proxy)
+        proxy(req, res, target);
     }
 }
 

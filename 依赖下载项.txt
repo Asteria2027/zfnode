@@ -33,3 +33,5 @@ userAgentParser(req.headers['user-agent'])
 
  npm i http-proxy
  var proxy = require('http-proxy').createProxyServer();
+
+ npm i request
