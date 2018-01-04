@@ -4,7 +4,7 @@
 
 var express = require('express');
 
-// var proxy = require('http-proxy').createProxyServer();//npm i http-proxy
+ var proxy = require('http-proxy').createProxyServer();//npm i http-proxy
 
 var request = require('request');//npm i request
 
@@ -16,24 +16,24 @@ var request = require('request');//npm i request
 
 var app = express();
 
-function proxy(req, res, target) {
-    request(target,function (error, response, body) {
-        if(!error && response.statusCode == 200){
-            console.log(response)
-            res.end(body);
-        }
-    });
-}
+//function proxy(req, res, target) {
+//    request(target,function (error, response, body) {
+//        if(!error && response.statusCode == 200){
+//            console.log(response)
+//            res.end(body);
+//        }
+//    });
+//}
 
 function proxyPass(config) {
     return function (req, res, next) {
         var target = config[req.hostname];
         console.log('target',target)
-        // proxy.web(req, res,{
-        //     target:target
-        // })
+         proxy.web(req, res,{
+             target:target
+         })
         console.log(proxy)
-        proxy(req, res, target);
+        //proxy(req, res, target);
     }
 }
 
